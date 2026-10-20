@@ -91,6 +91,8 @@
       --shadow-paper: 0 2px 6px rgba(91, 46, 56, .05), 0 22px 55px rgba(91, 46, 56, .10), 0 50px 100px rgba(91, 46, 56, .06);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --beat: .91s;
+      --eq-speed: 1.1s;
     }
 
     /* ------------------------------------------------------------------
@@ -1320,6 +1322,160 @@
     }
 
     /* ------------------------------------------------------------------
+       NHẠC NỀN — mặc định tắt, chỉ chạy khi người dùng chủ động bật
+    ------------------------------------------------------------------ */
+    .music-dock {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .music-dock--intro {
+      position: absolute;
+      z-index: 6;
+      top: clamp(10px, 2.3vh, 22px);
+      left: 50%;
+      transform: translateX(-50%);
+      flex-direction: column;
+      gap: 7px;
+    }
+    .music-dock--letter {
+      position: absolute;
+      right: clamp(10px, 2vw, 18px);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .music-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 38px;
+      padding: 9px 16px;
+      border: 1px solid rgba(167, 125, 69, .34);
+      border-radius: 999px;
+      color: var(--burgundy);
+      background: rgba(255, 251, 246, .76);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 18px rgba(91, 46, 56, .07);
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: background .35s ease, border-color .35s ease, color .35s ease, transform .3s var(--ease), box-shadow .35s ease;
+    }
+    .music-toggle:hover { border-color: rgba(167, 125, 69, .52); background: rgba(255, 253, 250, .92); }
+    .music-toggle:active { transform: scale(.98); }
+    .music-toggle:focus-visible { outline-color: var(--gold-deep); }
+    body.music-on .music-toggle {
+      color: #FFF6F0;
+      border-color: rgba(116, 61, 73, .45);
+      background: linear-gradient(145deg, #8A505B, var(--burgundy) 58%, #66323D);
+      box-shadow: 0 8px 20px rgba(90, 45, 56, .22), inset 0 1px 0 rgba(255, 255, 255, .14);
+    }
+    .music-toggle__eq {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 13px;
+      flex: 0 0 auto;
+    }
+    .music-toggle__eq i {
+      display: block;
+      width: 2.5px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--rose);
+      opacity: .55;
+    }
+    .music-toggle__eq i:nth-child(2) { height: 9px; }
+    .music-toggle__eq i:nth-child(3) { height: 5px; }
+    .music-toggle__eq i:nth-child(4) { height: 10px; }
+    body.music-on .music-toggle__eq i {
+      background: #F6DED6;
+      opacity: .95;
+      animation: eq-dance var(--eq-speed, 1.1s) ease-in-out infinite;
+    }
+    body.music-on .music-toggle__eq i:nth-child(2) { animation-delay: .17s; }
+    body.music-on .music-toggle__eq i:nth-child(3) { animation-delay: .33s; }
+    body.music-on .music-toggle__eq i:nth-child(4) { animation-delay: .08s; }
+    @keyframes eq-dance {
+      0%, 100% { height: 4px; }
+      50% { height: 13px; }
+    }
+    .music-volume-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 2px 4px;
+    }
+    .music-volume-wrap[hidden] { display: none; }
+    .music-volume {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 96px;
+      height: 22px;
+      background: transparent;
+      cursor: pointer;
+    }
+    .music-volume::-webkit-slider-runnable-track {
+      height: 2px;
+      border-radius: 2px;
+      background: rgba(116, 61, 73, .22);
+    }
+    .music-volume::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 13px;
+      height: 13px;
+      margin-top: -5.5px;
+      border: 1px solid rgba(255, 255, 255, .75);
+      border-radius: 50%;
+      background: var(--burgundy);
+      box-shadow: 0 1px 5px rgba(91, 46, 56, .3);
+    }
+    .music-volume::-moz-range-track { height: 2px; border-radius: 2px; background: rgba(116, 61, 73, .22); }
+    .music-volume::-moz-range-thumb {
+      width: 12px; height: 12px;
+      border: 1px solid rgba(255, 255, 255, .75);
+      border-radius: 50%;
+      background: var(--burgundy);
+      box-shadow: 0 1px 5px rgba(91, 46, 56, .3);
+    }
+    .music-volume:focus-visible { outline-color: var(--gold-deep); outline-offset: 2px; }
+    .music-note {
+      max-width: 260px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-family: var(--sans);
+      font-size: 10.5px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .music-note[hidden] { display: none; }
+    .music-dock--letter .music-note {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 210px;
+      text-align: right;
+      padding: 7px 10px;
+      border: 1px solid rgba(116, 61, 73, .14);
+      border-radius: 4px;
+      background: rgba(255, 251, 246, .94);
+      box-shadow: 0 8px 20px rgba(91, 46, 56, .1);
+    }
+    /* Nhịp nhạc nhẹ đồng bộ với hiệu ứng của trang */
+    body.music-on .envelope__seal { animation-duration: calc(var(--beat) * 4); }
+    body.music-on .hug__heart { animation-duration: calc(var(--beat) * 3); }
+
+    /* ------------------------------------------------------------------
        RESPONSIVE
     ------------------------------------------------------------------ */
     @media (max-width: 1100px) {
@@ -1349,7 +1505,10 @@
       .letter-view { transform: translateY(8px); }
       .letter-bar { min-height: calc(44px + var(--safe-top)); gap: 10px; padding-top: calc(10px + var(--safe-top)); padding-bottom: 10px; }
       .letter-bar__note { font-size: 9px; letter-spacing: .14em; }
-      .letter-bar__line { flex-basis: 28px; }
+      .letter-bar__line { display: none; }
+      .music-toggle--compact { padding: 9px 13px; }
+      .music-toggle--compact .music-toggle__label { display: none; }
+      .music-dock--letter { right: 8px; }
       .letter-scroll { padding: 10px 9px calc(30px + var(--safe-bottom)); }
       .letter-paper { border-radius: 2px 4px 3px 4px; }
       .letter-paper::before { inset: 8px; }
@@ -1429,6 +1588,10 @@
       .intro, .letter-view, .hug__message { transition: none !important; }
       .envelope, .hug-button { transform: none !important; }
       .hug__halo, .hug__ring { display: none; }
+      body.music-on .music-toggle__eq i { animation: none !important; height: 9px; opacity: .9; }
+      body.music-on .music-toggle__eq i:nth-child(2) { height: 12px; }
+      body.music-on .music-toggle__eq i:nth-child(3) { height: 6px; }
+      body.music-on .music-toggle__eq i:nth-child(4) { height: 11px; }
     }
   </style>
 </head>
@@ -1603,6 +1766,19 @@
         </noscript>
       </div>
     </div>
+
+    <!-- Nút nhạc nền đặt sau nút mở thư trong DOM để phím Tab gặp thao tác chính trước -->
+    <div class="music-dock music-dock--intro">
+      <button class="music-toggle" type="button" data-music-toggle aria-pressed="false" aria-label="Bật nhạc nền">
+        <span class="music-toggle__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="music-toggle__label" data-music-label>Bật nhạc</span>
+      </button>
+      <label class="music-volume-wrap" data-music-volume-wrap hidden>
+        <span class="sr-only">Âm lượng nhạc nền</span>
+        <input class="music-volume" type="range" min="0" max="100" value="55" data-music-volume aria-label="Âm lượng nhạc nền">
+      </label>
+      <p class="music-note" data-music-note role="status" hidden></p>
+    </div>
   </div>
 
   <!-- ================= LETTER ================= -->
@@ -1612,6 +1788,13 @@
       <span class="letter-bar__note">Lá thư này chỉ dành cho mẹ.</span>
       <svg class="letter-bar__heart" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-heart"></use></svg>
       <span class="letter-bar__line" aria-hidden="true"></span>
+      <div class="music-dock music-dock--letter">
+        <button class="music-toggle music-toggle--compact" type="button" data-music-toggle aria-pressed="false" aria-label="Bật nhạc nền">
+          <span class="music-toggle__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="music-toggle__label" data-music-label>Bật nhạc</span>
+        </button>
+        <p class="music-note" data-music-note role="status" hidden></p>
+      </div>
     </header>
 
     <div class="letter-scroll" id="letterScroll">
@@ -1880,6 +2063,15 @@
         hugCard.classList.add('is-hugging');
 
         spawnBurstHearts();
+
+        // Nhạc nền ngân nhẹ lên một chút, không tăng đột ngột.
+        if (musicEnabled && MUSIC.volume > 0) {
+          setMusicLevel(Math.min(1, MUSIC.volume * 1.12), 650);
+          window.setTimeout(() => {
+            if (musicEnabled) setMusicLevel(MUSIC.volume, 1500);
+          }, 950);
+        }
+
         window.clearTimeout(hugTimer);
         hugTimer = window.setTimeout(() => {
           hugCard.classList.remove('is-hugging');
@@ -1910,8 +2102,262 @@
         }, 150);
       });
 
+      /* ================================================================
+         NHẠC NỀN
+         - Mặc định TẮT. Chỉ phát sau khi người dùng chủ động bấm nút.
+         - Chỉ một Audio duy nhất, fade mềm, không chồng tiếng.
+         - Không tự bật lại sau khi người dùng đã tắt.
+      ================================================================ */
+      const MUSIC = {
+        src: 'assets/music/chopin-nocturne-op9-no2.mp3',
+        volume: 0.55,
+        fadeInMs: 1600,
+        fadeOutMs: 1100,
+        loopFadeSec: 1.4
+      };
+
+      let audioEl = null;
+      let musicEnabled = false;
+      let musicSuspended = false;
+      let musicLoading = false;
+      let musicStoppedByUser = false;
+      let musicLevel = 0;
+      let rampFrom = 0;
+      let rampTo = 0;
+      let rampStart = 0;
+      let rampDur = 0.001;
+      let musicRaf = 0;
+
+      const musicButtons = $$('[data-music-toggle]');
+      const musicLabels = $$('[data-music-label]');
+      const musicVolumeWraps = $$('[data-music-volume-wrap]');
+      const musicVolumeInputs = $$('[data-music-volume]');
+      const musicNotes = $$('[data-music-note]');
+
+      function readSavedVolume() {
+        try {
+          const saved = Number(window.localStorage.getItem('momletter.volume'));
+          if (saved > 0 && saved <= 1) {
+            MUSIC.volume = saved;
+            musicVolumeInputs.forEach((input) => { input.value = String(Math.round(saved * 100)); });
+          }
+        } catch (error) {
+          /* Trình duyệt chặn localStorage — dùng mức mặc định. */
+        }
+      }
+
+      function saveVolume() {
+        try {
+          window.localStorage.setItem('momletter.volume', String(MUSIC.volume));
+        } catch (error) {
+          /* Bỏ qua. */
+        }
+      }
+
+      function showMusicNote(text) {
+        musicNotes.forEach((el) => {
+          el.textContent = text;
+          el.hidden = false;
+        });
+      }
+
+      function hideMusicNote() {
+        musicNotes.forEach((el) => {
+          el.hidden = true;
+          el.textContent = '';
+        });
+      }
+
+      function playSafely(el) {
+        let result;
+        try {
+          result = el.play();
+        } catch (error) {
+          return;
+        }
+        if (result && typeof result.catch === 'function') {
+          result.catch((error) => {
+            if (error && error.name === 'NotAllowedError') {
+              musicEnabled = false;
+              musicLoading = false;
+              setMusicLevel(0, 320);
+              updateMusicUI();
+              showMusicNote('Trình duyệt chưa cho phát nhạc. Mẹ bấm nút một lần nữa nhé.');
+            }
+          });
+        }
+      }
+
+      function ensureAudio() {
+        if (audioEl) return audioEl;
+
+        const el = new Audio();
+        el.preload = 'none';
+        el.loop = true;
+        el.volume = 0;
+
+        el.addEventListener('error', () => {
+          musicEnabled = false;
+          musicLoading = false;
+          musicStoppedByUser = false;
+          setMusicLevel(0, 400);
+          updateMusicUI();
+          showMusicNote('Chưa tải được bản nhạc. Mẹ vẫn đọc được lá thư nhé.');
+        });
+        el.addEventListener('playing', () => { musicLoading = false; updateMusicUI(); });
+        el.addEventListener('canplay', () => { musicLoading = false; updateMusicUI(); });
+        el.addEventListener('waiting', () => { musicLoading = true; updateMusicUI(); });
+        el.addEventListener('pause', () => {
+          // Trình duyệt có thể tạm dừng (ví dụ khi có cuộc gọi) — chỉ chạy lại nếu
+          // người dùng chưa tắt nhạc.
+          if (musicEnabled && !musicSuspended && !musicStoppedByUser) {
+            window.setTimeout(() => {
+              if (musicEnabled && !musicSuspended && el.paused) playSafely(el);
+            }, 500);
+          }
+        });
+
+        audioEl = el;
+        // Gắn vào DOM (thẻ audio không có controls nên không hiển thị gì)
+        document.body.appendChild(el);
+        return el;
+      }
+
+      function setMusicLevel(target, durationMs) {
+        rampFrom = musicLevel;
+        rampTo = target;
+        rampStart = performance.now();
+        rampDur = Math.max(0.001, durationMs / 1000);
+      }
+
+      // Méo nhẹ ở đầu/cuối mỗi vòng lặp để bản nhạc nối mềm, không bị cụt.
+      function loopFactor() {
+        if (!audioEl || !audioEl.duration || !isFinite(audioEl.duration)) return 1;
+        const t = audioEl.currentTime;
+        const d = audioEl.duration;
+        const left = d - t;
+        if (left < MUSIC.loopFadeSec) return Math.max(0, left / MUSIC.loopFadeSec);
+        if (t < MUSIC.loopFadeSec) return Math.max(0, t / MUSIC.loopFadeSec);
+        return 1;
+      }
+
+      function musicTick() {
+        musicRaf = 0;
+        if (!audioEl) return;
+
+        const elapsed = (performance.now() - rampStart) / 1000;
+        const k = Math.min(1, elapsed / rampDur);
+        const eased = k * k * (3 - 2 * k);
+        musicLevel = rampFrom + (rampTo - rampFrom) * eased;
+
+        let volume = musicLevel * loopFactor();
+        if (volume > 1) volume = 1;
+        if (volume < 0) volume = 0;
+        try { audioEl.volume = volume; } catch (error) { /* bỏ qua */ }
+
+        const idle = !musicEnabled || musicSuspended;
+        if (idle && musicLevel <= 0.002) {
+          if (!audioEl.paused) audioEl.pause();
+          updateMusicUI();
+          return;
+        }
+
+        musicRaf = window.requestAnimationFrame(musicTick);
+      }
+
+      function startMusicLoop() {
+        if (musicRaf) return;
+        musicRaf = window.requestAnimationFrame(musicTick);
+      }
+
+      function updateMusicUI() {
+        body.classList.toggle('music-on', musicEnabled);
+        const label = musicLoading ? 'Đang tải…' : (musicEnabled ? 'Đang phát' : 'Bật nhạc');
+        musicButtons.forEach((btn) => {
+          btn.setAttribute('aria-pressed', musicEnabled ? 'true' : 'false');
+          btn.setAttribute('aria-label', musicEnabled ? 'Tắt nhạc nền' : 'Bật nhạc nền');
+        });
+        musicLabels.forEach((el) => { el.textContent = label; });
+        musicVolumeWraps.forEach((el) => { el.hidden = !musicEnabled; });
+      }
+
+      function enableMusic() {
+        const el = ensureAudio();
+        musicEnabled = true;
+        musicSuspended = false;
+        musicStoppedByUser = false;
+        hideMusicNote();
+
+        if (!el.getAttribute('src')) {
+          el.setAttribute('src', MUSIC.src);
+          el.load();
+        }
+
+        musicLoading = true;
+        setMusicLevel(MUSIC.volume, MUSIC.fadeInMs);
+        startMusicLoop();
+        updateMusicUI();
+        playSafely(el);
+      }
+
+      function disableMusic() {
+        musicEnabled = false;
+        musicStoppedByUser = true;
+        musicLoading = false;
+        setMusicLevel(0, MUSIC.fadeOutMs);
+        startMusicLoop();
+        updateMusicUI();
+      }
+
+      function toggleMusic() {
+        if (musicEnabled) disableMusic();
+        else enableMusic();
+      }
+
+      musicButtons.forEach((btn) => {
+        btn.addEventListener('click', toggleMusic);
+      });
+
+      musicVolumeInputs.forEach((input) => {
+        input.addEventListener('input', () => {
+          const value = Math.max(0, Math.min(1, Number(input.value) / 100));
+          MUSIC.volume = value;
+          saveVolume();
+          musicVolumeInputs.forEach((other) => {
+            if (other !== input) other.value = String(Math.round(value * 100));
+          });
+          if (musicEnabled) setMusicLevel(value, 280);
+        });
+      });
+
+      // Tab bị ẩn thì nhạc tắm dần và dừng; quay lại tab thì tiếp tục nếu
+      // người dùng vẫn đang bật nhạc.
+      document.addEventListener('visibilitychange', () => {
+        if (!audioEl) return;
+        if (document.hidden) {
+          if (musicEnabled && !musicSuspended) {
+            musicSuspended = true;
+            setMusicLevel(0, 700);
+            startMusicLoop();
+          }
+        } else if (musicSuspended) {
+          musicSuspended = false;
+          if (musicEnabled) {
+            setMusicLevel(MUSIC.volume, MUSIC.fadeInMs);
+            startMusicLoop();
+            playSafely(audioEl);
+          }
+        }
+      });
+
+      window.addEventListener('pagehide', () => {
+        if (audioEl && !audioEl.paused) audioEl.pause();
+      });
+
       fillLetter();
       makePetals();
+      readSavedVolume();
+      updateMusicUI();
     })();
   </script>
 </body>

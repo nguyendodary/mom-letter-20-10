@@ -3,6 +3,22 @@
 Website chúc mừng Ngày Phụ nữ Việt Nam 20/10/2026, làm riêng cho mẹ.
 Một file HTML duy nhất, không cần backend, không cần database, không cần mạng sau khi tải trang.
 
+## Nhạc nền
+
+- Bản nhạc: **Chopin – Nocturne in E♭ major, Op. 9 No. 2** (piano solo, Andante ~66–70 BPM).
+- Nguồn & giấy phép: bản thu **Public Domain** của Musopen, lưu tại `assets/music/chopin-nocturne-op9-no2.mp3`.
+  Chi tiết nguồn gốc, giấy phép và đường dẫn tải: `assets/music/CREDITS.md`.
+- **Mặc định tắt.** Người nhận phải chủ động bấm “♫ Bật nhạc” thì trình duyệt mới tải file (không tải khi mở trang) và bắt đầu phát.
+- Bật: âm lượng fade lên trong 1,6 giây. Tắt: fade xuống rồi mới dừng. Mỗi vòng lặp được fade mềm ở đầu/cuối nên không bị cụt.
+- Chỉ dùng **một** thẻ `<audio>` duy nhất — bật/tắt liên tục không tạo tiếng chồng nhau.
+- Có thanh chỉnh âm lượng (lưu lại trong `localStorage`), `aria-label`/`aria-pressed` đầy đủ.
+- Tab bị ẩn → nhạc tắm dần và dừng; quay lại tab thì tiếp tục nếu người dùng vẫn đang bật.
+- Nút nhạc trên màn hình lá thư và trên thanh công cụ khi đọc thư luôn đồng bộ trạng thái.
+- Nếu file nhạc lỗi / không tải được: hiện ghi chú nhẹ, mọi chức năng khác vẫn chạy bình thường.
+
+Đổi bản nhạc: thay file trong `assets/music/` và sửa `MUSIC.src` trong khối `const MUSIC = { ... }` của `index.html`
+(khoảng dòng 1890). Máy chủ local phục vụ `/assets/` kèm hỗ trợ HTTP Range nên phát nhạc trên điện thoại mượt.
+
 ## Công nghệ
 
 - HTML5 + CSS3 + JavaScript thuần (không framework, không thư viện ngoài).
