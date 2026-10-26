@@ -1357,7 +1357,7 @@
       align-items: center;
       justify-content: center;
       gap: 9px;
-      min-height: 38px;
+      min-height: 44px;
       padding: 9px 16px;
       border: 1px solid rgba(167, 125, 69, .34);
       border-radius: 999px;
@@ -1428,27 +1428,31 @@
       -webkit-appearance: none;
       appearance: none;
       width: 96px;
-      height: 22px;
+      height: 44px;
       background: transparent;
       cursor: pointer;
     }
+    /* Vùng chạm cao 44px: vẽ ray 2px ở giữa bằng nền của track để không phải
+       định vị lại thumb theo chiều cao phần tử. */
     .music-volume::-webkit-slider-runnable-track {
-      height: 2px;
-      border-radius: 2px;
-      background: rgba(116, 61, 73, .22);
+      height: 44px;
+      background: linear-gradient(rgba(116, 61, 73, .22), rgba(116, 61, 73, .22)) center / 100% 2px no-repeat;
     }
     .music-volume::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
       width: 13px;
       height: 13px;
-      margin-top: -5.5px;
+      margin-top: 14.5px;
       border: 1px solid rgba(255, 255, 255, .75);
       border-radius: 50%;
       background: var(--burgundy);
       box-shadow: 0 1px 5px rgba(91, 46, 56, .3);
     }
-    .music-volume::-moz-range-track { height: 2px; border-radius: 2px; background: rgba(116, 61, 73, .22); }
+    .music-volume::-moz-range-track {
+      height: 44px;
+      background: linear-gradient(rgba(116, 61, 73, .22), rgba(116, 61, 73, .22)) center / 100% 2px no-repeat;
+    }
     .music-volume::-moz-range-thumb {
       width: 12px; height: 12px;
       border: 1px solid rgba(255, 255, 255, .75);
