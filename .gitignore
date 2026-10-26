@@ -1,0 +1,7 @@
+# Cấu hình quyền cục bộ của CLI — không thuộc về website.
+.qoder/
+
+# Rác của hệ điều hành / editor.
+Thumbs.db
+.DS_Store
+*.swp

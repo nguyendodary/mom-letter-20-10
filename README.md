@@ -32,14 +32,26 @@ Máy chủ local phục vụ `/assets/` kèm hỗ trợ HTTP Range nên phát nh
 node serve.js          # http://localhost:8000
 ```
 
-Hoặc dùng bất kỳ static server nào:
+Cổng 8000 đã có chương trình khác dùng? Đổi cổng bằng biến môi trường:
 
 ```powershell
-python -m http.server 8000
-npx serve .
+$env:PORT = 8131; node serve.js     # PowerShell
+PORT=8131 node serve.js            # Git Bash
 ```
 
 Máy chủ `serve.js` chỉ lắng nghe ở `127.0.0.1` (không mở cho mạng LAN), tự nén gzip và tự nạp lại khi bạn sửa `index.html`.
+
+### Nếu muốn dùng static server khác
+
+**Bắt buộc: server phải hỗ trợ HTTP Range (byte-range).** Trình duyệt chỉ tải được bản nhạc
+khi server trả `206 Partial Content`; server bỏ qua header `Range` sẽ khiến trang hiện
+*"Chưa tải được bản nhạc"* (các phần còn lại vẫn chạy bình thường).
+
+| Server | Range | Ghi chú |
+| --- | --- | --- |
+| `node serve.js` | ✅ | khuyến nghị |
+| GitHub Pages, `npx serve .` | ✅ | dùng được |
+| `python -m http.server` | ❌ | chỉ xem được giao diện, **nhạc không phát**; trên Windows lệnh là `py -m http.server` |
 
 ## Sửa nội dung
 
