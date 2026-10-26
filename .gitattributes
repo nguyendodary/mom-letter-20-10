@@ -1,0 +1,18 @@
+# Lưu LF trong repo và làm việc với LF trên mọi máy.
+# Ghi đè core.autocrlf=true để hết cảnh báo "LF will be replaced by CRLF".
+* text=auto eol=lf
+
+# Nhị phân: không đổi dòng kết thúc, không diff/merge.
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
