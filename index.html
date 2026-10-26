@@ -1033,6 +1033,14 @@
       font-weight: 600;
       line-height: 1.15;
     }
+    .letter-signature svg {
+      display: inline-block;
+      width: .58em;
+      height: .58em;
+      margin-left: .14em;
+      vertical-align: -.02em;
+      fill: var(--rose);
+    }
 
     /* Hug keepsake */
     .hug {
@@ -1823,7 +1831,7 @@
 
           <div class="letter-signoff">
             <p class="letter-closing" data-letter-closing>Mãi yêu mẹ,</p>
-            <p class="letter-signature" data-letter-signature>Đứa con của mẹ ♡</p>
+            <p class="letter-signature"><span data-letter-signature>Đứa con của mẹ</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-heart"></use></svg></p>
           </div>
 
           <section class="hug" id="hugCard" aria-labelledby="hugHeading">
@@ -1844,7 +1852,7 @@
             <div class="hug__actions">
               <button class="hug-button" id="hugButton" type="button" aria-describedby="hugMessage">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-heart"></use></svg>
-                <span>Gửi mẹ một cái ôm thật lâu ♡</span>
+                <span>Gửi mẹ một cái ôm thật lâu</span>
               </button>
               <button class="replay-button" id="replayButton" type="button">Đọc lại lá thư</button>
             </div>
@@ -1883,9 +1891,9 @@
           'Chúc mẹ của con luôn bình an, khỏe mạnh và hạnh phúc.'
         ],
         closing: 'Mãi yêu mẹ,',
-        signature: 'Đứa con của mẹ ♡',
+        signature: 'Đứa con của mẹ',
         hugTitle: 'Sau tất cả, điều con mong nhất vẫn là mẹ luôn bình an.',
-        hugButton: 'Gửi mẹ một cái ôm thật lâu ♡',
+        hugButton: 'Gửi mẹ một cái ôm thật lâu',
         hugMessage: 'Con ôm mẹ thật chặt nhé. Con yêu mẹ!',
         replayButton: 'Đọc lại lá thư'
       };
