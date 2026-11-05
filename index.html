@@ -83,9 +83,9 @@
       --ink-soft: #6B5750;
       --gold: #D8B77A;
       --gold-deep: #A77D45;
-      --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-      --hand: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
-      --sans: 'Avenir Next', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --serif: 'Times New Roman', Times, serif;
+      --hand: 'Times New Roman', Times, serif;
+      --sans: 'Times New Roman', Times, serif;
       --ease: cubic-bezier(.22, .61, .36, 1);
       --ease-silk: cubic-bezier(.65, 0, .15, 1);
       --shadow-paper: 0 2px 6px rgba(91, 46, 56, .05), 0 22px 55px rgba(91, 46, 56, .10), 0 50px 100px rgba(91, 46, 56, .06);
@@ -219,7 +219,7 @@
       font-family: var(--serif);
       font-size: clamp(2.33rem, 5.4vw, 4.15rem);
       font-weight: 600;
-      line-height: 1.02;
+      line-height: 1.18;
       letter-spacing: -.026em;
       text-wrap: balance;
       animation: rise-in 1s var(--ease) .22s both;
@@ -529,14 +529,14 @@
     .envelope__dedication small {
       display: block;
       margin-top: 4px;
-      color: var(--ink-soft);
+      color: var(--ink);
       font-family: var(--sans);
-      font-size: 7px;
-      font-weight: 500;
+      font-size: 8.5px;
+      font-weight: 600;
       letter-spacing: .18em;
       line-height: 1.4;
       text-transform: uppercase;
-      opacity: .8;
+      opacity: 1;
     }
     .envelope__postmark {
       position: absolute;
@@ -1772,7 +1772,7 @@
           <span class="tap-hint__mark" aria-hidden="true"></span>
           Mẹ chạm vào lá thư nhé.
         </p>
-        <p class="intro-signature">Từ đứa con luôn yêu mẹ.</p>
+        <p class="intro-signature">Từ đứa con luôn yêu thương mẹ.</p>
         <noscript>
           <p class="noscript-note">Để mở lá thư, mẹ hãy bật JavaScript trong trình duyệt nhé.</p>
         </noscript>
@@ -1829,12 +1829,12 @@
             <h2 class="sr-only" id="letterTitle">Lá thư dành riêng cho mẹ</h2>
           </header>
 
-          <p class="letter-greeting" id="letterGreeting" tabindex="-1">Mẹ yêu của con,</p>
+          <p class="letter-greeting" id="letterGreeting" tabindex="-1">Mẹ yêu thương của con,</p>
 
           <div class="letter-copy" id="letterCopy"></div>
 
           <div class="letter-signoff">
-            <p class="letter-closing" data-letter-closing>Mãi yêu mẹ,</p>
+            <p class="letter-closing" data-letter-closing>Mãi yêu thương mẹ,</p>
             <p class="letter-signature"><span data-letter-signature>Đứa con của mẹ</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-heart"></use></svg></p>
           </div>
 
@@ -1882,7 +1882,7 @@
       ================================================================ */
       const LETTER = {
         date: '20 · 10 · 2026',
-        greeting: 'Mẹ yêu của con,',
+        greeting: 'Mẹ yêu thương của con,',
         paragraphs: [
           'Nhân ngày 20/10, con muốn dành tặng mẹ một điều gì đó thật đặc biệt. Có thể món quà này không lớn lao, nhưng con đã làm nó bằng tất cả tình yêu thương của mình.',
           'Con biết rằng có những lúc con vô tâm, có những lời yêu thương con ngại nói ra, và có những điều mẹ đã làm cho con mà con chưa bao giờ cảm ơn cho đủ.',
@@ -1891,14 +1891,14 @@
           'Con mong mình sẽ có thêm thật nhiều thời gian bên mẹ, để có thể quan tâm mẹ nhiều hơn, ôm mẹ nhiều hơn và nói với mẹ những lời mà đáng lẽ con nên nói thường xuyên hơn.',
           'Mẹ không cần phải lúc nào cũng mạnh mẽ đâu. Mẹ cũng xứng đáng được yêu thương, được nghỉ ngơi và được chăm sóc.',
           'Nếu có một điều con luôn biết ơn trong cuộc đời này, thì đó là được làm con của mẹ.',
-          'Con yêu mẹ nhiều lắm. Không chỉ riêng ngày 20/10, mà trong tất cả những ngày bình thường còn lại nữa.',
+          'Con yêu thương mẹ nhiều lắm. Không chỉ riêng ngày 20/10, mà trong tất cả những ngày bình thường còn lại nữa.',
           'Chúc mẹ của con luôn bình an, khỏe mạnh và hạnh phúc.'
         ],
-        closing: 'Mãi yêu mẹ,',
+        closing: 'Mãi yêu thương mẹ,',
         signature: 'Đứa con của mẹ',
         hugTitle: 'Sau tất cả, điều con mong nhất vẫn là mẹ luôn bình an.',
         hugButton: 'Gửi mẹ một cái ôm thật lâu',
-        hugMessage: 'Con ôm mẹ thật chặt nhé. Con yêu mẹ!',
+        hugMessage: 'Con ôm mẹ thật chặt nhé. Con yêu thương mẹ!',
         replayButton: 'Đọc lại lá thư'
       };
 

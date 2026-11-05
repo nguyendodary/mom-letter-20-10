@@ -23,8 +23,8 @@ Máy chủ local phục vụ `/assets/` kèm hỗ trợ HTTP Range nên phát nh
 
 - HTML5 + CSS3 + JavaScript thuần (không framework, không thư viện ngoài).
 - Toàn bộ hình minh họa (phong thư, con dấu trái tim, hoa hồng, cánh hoa, lá thư) được vẽ bằng **HTML/CSS/SVG nội tuyến** — không dùng ảnh từ Internet, không có phụ thuộc bản quyền.
-- Font **Playfair Display** (italic) và **Caveat** (SIL Open Font License) được **nhúng thẳng trong file** dưới dạng base64 nên trang hiển thị đúng ngay cả khi offline.
-- Mỗi `@font-face` khai báo `unicode-range` theo từng subset (latin + vietnamese). **Chỉ dùng ký tự nằm trong các khoảng đó** — emoji hay ký tự như `♡`, `♫`, `→` nằm ngoài sẽ bị rơi sang font hệ thống, lệch kiểu hoặc hiện ô vuông. Hình trang trí (trái tim, hoa) luôn vẽ bằng SVG qua `<use href="#icon-...">`.
+- Font **Times New Roman** (serif hệ thống) được dùng cho toàn bộ văn bản — không nhúng font ngoài, không phụ thuộc mạng.
+- Hình trang trí (trái tim, hoa) luôn vẽ bằng SVG qua `<use href="#icon-...">`.
 
 ## Chạy thử trên máy
 
